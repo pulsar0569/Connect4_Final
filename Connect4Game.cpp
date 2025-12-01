@@ -97,17 +97,37 @@ char checkWinner(const GameState& state) {
 		for (int j = 0; j < 4; j++) {
             winner = lineWinner(state, i, j, 0, 1); // Check horizontal winner
 
-			if (winner == 'X' || winner == 'O') {
-				return winner;
-			}
+			if (winner == 'X' || winner == 'O') return winner;
 		}
 	}
 
 	// Check vertical winners
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 7; j++) {
+			winner = lineWinner(state, i, j, 1, 0); // Check vertical winner
+			
+			if (winner == 'X' || winner == 'O') return winner;
+		}
+	}
 
 	// Check horizontal bottom left to top right
+	for (int i = 5; i >= 3; i--) {
+		for (int j = 0; j <= 3; j++) {
+			winner = lineWinner(state, i, j, -1, 1);
+
+			if (winner == 'X' || winner == 'O') return winner;
+		}
+	}
 
 	// Check horizontal top left to bottom right
+	for (int i = 0; i < -1; i++) {
+		for (int j = 0; j < -1; j++) {
+			winner = lineWinner(state, i, j, -1, -1);
+
+			if (winner == 'X' || winner == 'O') return winner;
+		}
+	}
+
 
 	// No one won yet so return "no winner" char
 	return '\0';
