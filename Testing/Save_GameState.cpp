@@ -158,20 +158,28 @@ int main()
     //     if (winner == 'X' || winner == 'O') break;
 	// }
 
-    char setChar = 'X';
+    char setChar = 'O';
 
-    // state.board[5][1] = setChar;
-    // state.board[4][2] = setChar;
-    // state.board[3][3] = setChar;
-    // state.board[2][4] = setChar;
+    state.board[2][2] = setChar;
+    state.board[3][3] = setChar;
+    state.board[4][4] = setChar;
+    state.board[5][5] = setChar;
 
     PrintState(state);
 
-	
+    // Check horizontal top left to bottom right
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 4; j++) {
+			winner = lineWinner(state, i, j, 1, 1);
+            cout << endl;
+
+			if (winner == 'X' || winner == 'O') break;
+		}
+
+        if (winner == 'X' || winner == 'O') break;
+	}	
 
     cout << endl << endl << endl << "Winner is: " << winner << endl;
-
-    
 
     /*
 

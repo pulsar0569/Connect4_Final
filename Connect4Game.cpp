@@ -21,8 +21,8 @@ void initializeBoard(GameState& state) {
 }
 
 bool isValidColumn(int col) {
-
-    // Your solution here
+	// If col is in range of [1, 7]
+    if (col >= 1 && col <= 7) return true;
 
 	return false;
 }
@@ -54,7 +54,7 @@ bool dropPiece(GameState& state, int col) {
 }
 
 void togglePlayer(GameState& state) {
-	
+
     state.currentPlayer = state.currentPlayer == 'X' ? 'O' : 'X';
     
 }
@@ -122,9 +122,9 @@ char checkWinner(const GameState& state) {
 	}
 
 	// Check horizontal top left to bottom right
-	for (int i = 0; i < -1; i++) {
-		for (int j = 0; j < -1; j++) {
-			winner = lineWinner(state, i, j, -1, -1);
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 4; j++) {
+			winner = lineWinner(state, i, j, 1, 1);
 
 			if (winner == 'X' || winner == 'O') return winner;
 		}
@@ -146,7 +146,6 @@ bool checkDraw(const GameState& state) {
 }
 
 void printBoard(const GameState& state, std::ostream& out) {
-	
 	// Your solution here
 
 	for (int i = 0; i < 6; i++) {
@@ -159,31 +158,6 @@ void printBoard(const GameState& state, std::ostream& out) {
 		out << i << " ";
 	}
 	out << std::endl;
-
-	/* Should look like this for an empty board:
-	  
-	   . . . . . . .
-	   . . . . . . .
-	   . . . . . . .
-	   . . . . . . .
-	   . . . . . . .
-	   . . . . . . .
-	   . . . . . . .
-	   1 2 3 4 5 6 7
-	
-
-	   After some moves - ('X', 3), ('O', 4), ('X', 4):
-
-	   . . . . . . .
-	   . . . . . . .
-	   . . . . . . .
-	   . . . . . . .
-	   . . . . . . .
-	   . . . X . . .
-	   . . X O . . .
-	   1 2 3 4 5 6 7
-
-	*/
 }
 
 bool saveBoardToFile(const GameState& state, const std::string& path) {
