@@ -90,9 +90,26 @@ char lineWinner(const GameState& state, int r, int c, int dr, int dc) {
 }
 
 char checkWinner(const GameState& state) {
+	char winner;
 	
-	// Your solution here
+	// Check horizontal winners
+	for (int i = 0; i < 6; i++) {
+		for (int j = 0; j < 4; j++) {
+            winner = lineWinner(state, i, j, 0, 1); // Check horizontal winner
 
+			if (winner == 'X' || winner == 'O') {
+				return winner;
+			}
+		}
+	}
+
+	// Check vertical winners
+
+	// Check horizontal bottom left to top right
+
+	// Check horizontal top left to bottom right
+
+	// No one won yet so return "no winner" char
 	return '\0';
 }
 

@@ -132,10 +132,24 @@ int main()
 {
     GameState state;
 
-    LoadStateEmpty(state);
+    LoadStateChar(state);
     PrintState(state);
 
-   
+    char winner;
+    
+   // Check horizontal winners
+	// for (int i = 0; i < 6; i++) {
+	// 	for (int j = 0; j < 4; j++) {
+    //         winner = lineWinner(state, i, j, 0, 1); // Check horizontal winner
+    //         cout << endl;
+    //         if (winner == 'X' || winner == 'O') break;
+	// 	}
+    //     if (winner == 'X' || winner == 'O') break;
+	// }
+
+    cout << endl << endl << endl << "Winner is: " << winner << endl;
+
+    
 
     /*
 
