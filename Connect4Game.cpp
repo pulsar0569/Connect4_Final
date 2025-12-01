@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <fstream>
 
+// Optional Helper Function
 bool inBounds(int r, int c) {
 	
     // Your solution here
@@ -58,6 +59,7 @@ void togglePlayer(GameState& state) {
     
 }
 
+// Optional Helper Function
 char lineWinner(const GameState& state, int r, int c, int dr, int dc) {
 	
     char current = state.currentPlayer;
@@ -224,7 +226,7 @@ bool loadBoardFromFile(GameState& state, const std::string& path) {
 
 	return true;
 }
-
+// Optional Helper Function
 bool tryDropAs(GameState& temp, int col, char player) {
 	
 	// Your solution here
