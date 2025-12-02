@@ -2,6 +2,12 @@
 #include <cstdlib>
 #include <fstream>
 
+/* 
+	TODO:
+		- Make stronger cpu
+		- bot sees own wins, but not upcoming losses
+*/
+
 // Optional Helper Function
 bool inBounds(int r, int c) {
 	
@@ -38,7 +44,7 @@ int getLowestEmptyRow(const GameState& state, int col) {
 }
 
 bool isValidMove(const GameState& state, int col) {
-    if (getLowestEmptyRow(state, col) == -1) return false;
+    if (getLowestEmptyRow(state, col) == -1 || !isValidColumn(col)) return false;
 	return true;
 }
 
@@ -147,7 +153,6 @@ bool checkDraw(const GameState& state) {
 
 void printBoard(const GameState& state, std::ostream& out) {
 	// Your solution here
-
 	for (int i = 0; i < 6; i++) {
 		for (int j = 0; j < 7; j++) {
 			out << state.board[i][j] << " ";
@@ -207,10 +212,41 @@ bool tryDropAs(GameState& temp, int col, char player) {
 
 	return false;
 }
+// Brute forces every spot and returns num of col if win found, otherwise return -1
+int checkImmediateWin(GameState temp) {
+	// Possibly could put priority of immediate wins by saving "loss" spot here, then come back after fully checking for wins
+	int selfLoss = -1;
+
+	// Used for reverting after placing piece down
+	GameState original = temp;
+	
+	// Try each column
+	for (int i = 1; i < 8; i++) {
+		// If successfully placed and immediate win/loss for any player
+		dropPiece(temp, i);
+
+		if (checkWinner(temp) != '\0') { 
+			return i; // Returns position to place at
+		}
+		temp = original;
+	}
+	// No immediate wins found
+	return -1;
+}
 
 int chooseComputerMove(const GameState& state) {
 	
-	// Your solution here
+	// Check for immediate wins/losses
+	int winSpot = checkImmediateWin(state);
+	if (winSpot != -1) return winSpot;
+
+
+	// Fallback random spot
+	srand(time(0));
+	int spot = (rand() % 7)+1;
+	std::cout << "Placing at spot " << spot << std::endl;
+
+	return spot;
 
 	return -1;
 }
