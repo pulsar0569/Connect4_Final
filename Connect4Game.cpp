@@ -155,6 +155,8 @@ bool checkDraw(const GameState& state) {
 }
 
 void printBoard(const GameState& state, std::ostream& out) {
+	// system("cls");   // Clears console on windows
+	
 	// Your solution here
 	for (int i = 0; i < 6; i++) {
 		for (int j = 0; j < 7; j++) {
@@ -215,10 +217,20 @@ bool tryDropAs(GameState& temp, int col, char player) {
 
 	return false;
 }
+
+void restoreBoard(GameState& temp, const GameState& original) {
+	for (int i = 0; i < 6; i++) {
+		for (int j = 0; j < 7; j++) {
+			temp.board[i][j] = original.board[i][j];
+		}
+	}
+}
+
 // Brute forces every spot and returns num of col if win found, otherwise return -1
 int checkImmediateWin(GameState temp) {
 	// Used for reverting after placing piece down
 	GameState original = temp;
+
 	
 	temp.currentPlayer = 'X';
 	// Check with each player starting with self for immediate wins/losses
@@ -226,15 +238,14 @@ int checkImmediateWin(GameState temp) {
 		togglePlayer(temp);
 
 		// Try each column for winner
-		for (int i = 1; i < 8; i++) {
-			// If successfully placed and immediate win/loss for any player
-			
-			dropPiece(temp, i);
+		for (int j = 1; j <= 7; j++) {
+			// Place at coloumn i (1-7)
+			dropPiece(temp, j);
 			
 			if (checkWinner(temp) != '\0') { 
-				return i; // Returns position to place at
+				return j; // Returns position to place at
 			}
-			temp = original;
+			restoreBoard(temp, original);
 		}
 	}
 	// No immediate wins found
