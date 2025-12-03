@@ -4,10 +4,10 @@
 
 /* 
 
-	THIS PROJECT WAS MADE ON GITHUB AND PROGRAM HISTORY ON THERE:
+	THIS PROJECT WAS MADE ON MY GITHUB AND VERSION HISTORY ON THERE:
 		https://github.com/pulsar0569/Connect4_Final
 
-	TODO:
+	(Maybe) TODO:
 		- Make stronger cpu
 */
 
@@ -246,10 +246,6 @@ int chooseComputerMove(const GameState& state) {
 	// Check for immediate wins/losses
 	int winSpot = checkImmediateWin(state);
 	if (winSpot != -1) return winSpot;
-
-	// Make diagonals if can
-
-	// Make columns if can
 
 	// Capture center pieces at col 3 and 4
 	for (int i = 3; i <= 4; i++) {
