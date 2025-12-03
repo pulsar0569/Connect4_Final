@@ -5,7 +5,6 @@
 /* 
 	TODO:
 		- Make stronger cpu
-		- bot sees own wins, but not upcoming losses
 */
 
 // Optional Helper Function
@@ -214,32 +213,46 @@ bool tryDropAs(GameState& temp, int col, char player) {
 }
 // Brute forces every spot and returns num of col if win found, otherwise return -1
 int checkImmediateWin(GameState temp) {
-	// Possibly could put priority of immediate wins by saving "loss" spot here, then come back after fully checking for wins
-	int selfLoss = -1;
-
 	// Used for reverting after placing piece down
 	GameState original = temp;
 	
-	// Try each column
-	for (int i = 1; i < 8; i++) {
-		// If successfully placed and immediate win/loss for any player
-		dropPiece(temp, i);
+	temp.currentPlayer = 'X';
+	// Check with each player starting with self for immediate wins/losses
+	for (int i = 0; i < 2; i++) {
+		togglePlayer(temp);
 
-		if (checkWinner(temp) != '\0') { 
-			return i; // Returns position to place at
+		// Try each column for winner
+		for (int i = 1; i < 8; i++) {
+			// If successfully placed and immediate win/loss for any player
+			
+			dropPiece(temp, i);
+			
+			if (checkWinner(temp) != '\0') { 
+				return i; // Returns position to place at
+			}
+			temp = original;
 		}
-		temp = original;
 	}
 	// No immediate wins found
 	return -1;
 }
 
+// Should return spots 1-7 inclusive
 int chooseComputerMove(const GameState& state) {
-	
 	// Check for immediate wins/losses
 	int winSpot = checkImmediateWin(state);
 	if (winSpot != -1) return winSpot;
 
+	// Make diagonals if can
+
+	// Make columns if can
+
+	// Capture center pieces at col 3 and 4
+	for (int i = 3; i <= 4; i++) {
+		if (getLowestEmptyRow(state, i) == 5) {
+			return i;
+		}
+	}
 
 	// Fallback random spot
 	srand(time(0));
