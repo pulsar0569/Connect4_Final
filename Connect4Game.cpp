@@ -3,6 +3,10 @@
 #include <fstream>
 
 /* 
+
+	THIS PROJECT WAS MADE ON GITHUB AND PROGRAM HISTORY ON THERE:
+		https://github.com/pulsar0569/Connect4_Final
+
 	TODO:
 		- Make stronger cpu
 */
