@@ -11,14 +11,6 @@
 		- Make stronger cpu
 */
 
-// Optional Helper Function
-bool inBounds(int r, int c) {
-	
-    // Your solution here
-    
-    return false;
-}
-
 void initializeBoard(GameState& state) {	
     for (int i = 0; i < 6; i++) {
 		for (int j = 0; j < 7; j++) {
@@ -139,7 +131,6 @@ char checkWinner(const GameState& state) {
 		}
 	}
 
-
 	// No one won yet so return "no winner" char
 	return '\0';
 }
@@ -210,13 +201,7 @@ bool loadBoardFromFile(GameState& state, const std::string& path) {
 
 	return true;
 }
-// Optional Helper Function
-bool tryDropAs(GameState& temp, int col, char player) {
-	
-	// Your solution here
 
-	return false;
-}
 
 void restoreBoard(GameState& temp, const GameState& original) {
 	for (int i = 0; i < 6; i++) {
@@ -268,9 +253,24 @@ int chooseComputerMove(const GameState& state) {
 	// Fallback random spot
 	srand(time(0));
 	int spot = (rand() % 7)+1;
-	std::cout << "Placing at spot " << spot << std::endl;
 
 	return spot;
 
 	return -1;
+}
+
+// Optional Helper Function
+bool tryDropAs(GameState& temp, int col, char player) {
+	
+	// Your solution here
+
+	return false;
+}
+
+// Optional Helper Function
+bool inBounds(int r, int c) {
+	
+    // Your solution here
+    
+    return false;
 }
