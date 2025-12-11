@@ -55,9 +55,7 @@ bool dropPiece(GameState& state, int col) {
 }
 
 void togglePlayer(GameState& state) {
-
     state.currentPlayer = state.currentPlayer == 'X' ? 'O' : 'X';
-    
 }
 
 // Optional Helper Function
@@ -136,7 +134,6 @@ char checkWinner(const GameState& state) {
 }
 
 bool checkDraw(const GameState& state) {
-	
 	// Check if the top line has empty, if empty found, can still place
 	for (int i = 0; i < 7; i++) {
 		if (state.board[0][i] == '.') return false;
@@ -145,9 +142,9 @@ bool checkDraw(const GameState& state) {
 	return true;
 }
 
-void printBoard(const GameState& state, std::ostream& out) {
-	// system("cls");   // Clears console on windows
-	
+void printBoard(const GameState& state, std::ostream& out) {	
+	clearConsole();
+
 	// Your solution here
 	for (int i = 0; i < 6; i++) {
 		for (int j = 0; j < 7; j++) {
@@ -202,7 +199,6 @@ bool loadBoardFromFile(GameState& state, const std::string& path) {
 	return true;
 }
 
-
 void restoreBoard(GameState& temp, const GameState& original) {
 	for (int i = 0; i < 6; i++) {
 		for (int j = 0; j < 7; j++) {
@@ -216,7 +212,6 @@ int checkImmediateWin(GameState temp) {
 	// Used for reverting after placing piece down
 	GameState original = temp;
 
-	
 	temp.currentPlayer = 'X';
 	// Check with each player starting with self for immediate wins/losses
 	for (int i = 0; i < 2; i++) {
@@ -255,22 +250,17 @@ int chooseComputerMove(const GameState& state) {
 	int spot = (rand() % 7)+1;
 
 	return spot;
-
-	return -1;
 }
 
-// Optional Helper Function
-bool tryDropAs(GameState& temp, int col, char player) {
-	
-	// Your solution here
+void clearConsole() {
+	std::string consoleClear;
 
-	return false;
-}
+	// Use preprocessor directives to determine the OS
+	#if defined(_WIN32)
+		consoleClear = "cls";
+	#else
+		consoleClear = "clear";
+	#endif
 
-// Optional Helper Function
-bool inBounds(int r, int c) {
-	
-    // Your solution here
-    
-    return false;
+	system(consoleClear.c_str());
 }

@@ -10,6 +10,8 @@ int main() {
     const int GAMEMODE_PVP = 1; // Player versus Player mode
     const int GAMEMODE_PVC = 2; // Player versus Computer mode
 
+	const std::string savePath = "game.save";
+
 	std::cout << "Select mode: 1) Player vs Player  2) Player vs Computer" << '\n';
 	std::cout << "Enter 1 or 2: ";
 	std::string modeInput;
@@ -21,6 +23,19 @@ int main() {
 			if (m == GAMEMODE_PVP || m == GAMEMODE_PVC) {
                 mode = m;
             }
+		}
+	}
+
+	std::cout << "Select start: 1) New Game 2) Load Game" << std::endl;
+	std::cout << "Enter 1 or 2: ";
+
+	if (std::getline(std::cin, modeInput)) {
+		std::istringstream stream(modeInput);
+		int n;
+		if (stream >> n) {
+			if (n == 2) {
+				loadBoardFromFile(state, savePath);
+			}
 		}
 	}
 
@@ -53,6 +68,8 @@ int main() {
 				std::cout << "Invalid move. Column must be 1-7 and not full.\n";
 				continue;
 			}
+
+			saveBoardToFile(state, savePath);
 		}
 
         // Drop piece and check game state
@@ -70,7 +87,6 @@ int main() {
 		}
 		togglePlayer(state);
 	}
-
-
+	
 	return 0;
 }

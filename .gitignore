@@ -31,6 +31,9 @@
 *.out
 *.app
 
+# Game Created Saves
+*.save
+
 #VSCode Env
 /.vscode
 .envrc

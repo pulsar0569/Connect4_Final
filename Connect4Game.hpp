@@ -154,3 +154,8 @@ bool tryDropAs(GameState& state, int col, char player);
  * \return 'X', 'O', or '\\0' if not a winning segment
  */
 char lineWinner(const GameState& state, int r, int c, int dr, int dc);
+
+/**
+ * \brief Clears the terminal completely between multiple operating systems
+ */
+void clearConsole();
